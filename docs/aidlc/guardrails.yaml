@@ -1,0 +1,14 @@
+version: '1.0'
+metadata:
+  name: Ecommerce AIDLC
+  description: AI Development Lifecycle configuration for Ecommerce AIDLC
+  generatedAt: '2026-09-25T09:33:21.559023+00:00'
+  projectId: 6653a903-2bf3-4fce-a6fc-f49a45cfdd6e
+knowledgeSources:
+- id: pace-lumen-api-v2
+  type: git
+  location:
+  - https://github.com/UST-PACE/pace-lumen-api-v2.git
+  branch: main
+  include:
+  - '**/*.md'
