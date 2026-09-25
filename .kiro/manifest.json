@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-25T10:31:43.640159+00:00",
+  "project": {
+    "name": "Lumen",
+    "description": "AI context knowledge base",
+    "last_updated": "2026-09-25T10:31:43.640159+00:00"
+  },
+  "assets": {
+    "architecture.md": {
+      "tags": [
+        "pace-lumen-ui",
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/architecture.md",
+      "description": "architecture",
+      "version": 1,
+      "size_bytes": 62198,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "ECommerce_context.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/ECommerce_context.md",
+      "description": "context",
+      "version": 1,
+      "size_bytes": 17094,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "instruction.md": {
+      "tags": [
+        "pace-lumen-ui",
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/instruction.md",
+      "description": "Instructions \u2014 Project",
+      "version": 1,
+      "size_bytes": 28330,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "policies.md": {
+      "tags": [
+        "pace-lumen-ui",
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/policies.md",
+      "description": "policies",
+      "version": 1,
+      "size_bytes": 6533,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "rules.md": {
+      "tags": [
+        "pace-lumen-ui",
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/rules.md",
+      "description": "rules",
+      "version": 1,
+      "size_bytes": 11407,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "setup/README.md": {
+      "tags": [
+        "pace-lumen-ui",
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/README.md",
+      "description": "README",
+      "version": 1,
+      "size_bytes": 1419,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "standards.md": {
+      "tags": [
+        "pace-lumen-ui",
+        "ECommerce"
+      ],
+      "path": ".kiro/steering/standards.md",
+      "description": "standards",
+      "version": 1,
+      "size_bytes": 13176,
+      "last_updated": "2026-09-25T10:21:04.604695+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    }
+  },
+  "statistics": {
+    "total_files": 7,
+    "total_size_bytes": 140157
+  },
+  "mcp": {
+    "config_path": ".kiro/settings/mcp.json",
+    "servers": [
+      "jira"
+    ]
+  }
+}
