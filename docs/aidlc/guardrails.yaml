@@ -1,0 +1,21 @@
+version: '1.0'
+metadata:
+  name: Lumen
+  description: AI Development Lifecycle configuration for Lumen
+  generatedAt: '2026-09-25T10:20:45.317346+00:00'
+  projectId: 779d4a64-e5ed-4f20-8a80-8fbd2e233cd8
+knowledgeSources:
+- id: pace-lumen-api-v2
+  type: git
+  location:
+  - https://github.com/UST-PACE/pace-lumen-api-v2.git
+  branch: main
+  include:
+  - '**/*.md'
+- id: ecommerce
+  type: git
+  location:
+  - https://github.com/karthikv2206/ECommerce.git
+  branch: main
+  include:
+  - '**/*.md'
