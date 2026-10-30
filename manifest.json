@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-30T09:57:04.702453+00:00",
+  "project": {
+    "name": "Ecommerce AIDLC",
+    "description": "AI context knowledge base",
+    "last_updated": "2026-10-30T09:57:04.702453+00:00"
+  },
+  "assets": {
+    "meta_judgment.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/meta_judgment.instructions.md",
+      "description": "Meta / Judgment",
+      "version": 1,
+      "size_bytes": 903,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "constraint_regulatory.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/constraint_regulatory.instructions.md",
+      "description": "Constraint / Regulatory",
+      "version": 1,
+      "size_bytes": 11025,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "direction_intentional.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/direction_intentional.instructions.md",
+      "description": "Direction / Intentional",
+      "version": 1,
+      "size_bytes": 363,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "direction_ethical_governance.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/direction_ethical_governance.instructions.md",
+      "description": "Direction / Ethical_Governance",
+      "version": 1,
+      "size_bytes": 2607,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "direction_feedback.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/direction_feedback.instructions.md",
+      "description": "Direction / Feedback",
+      "version": 1,
+      "size_bytes": 4106,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "direction_learning.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/direction_learning.instructions.md",
+      "description": "Direction / Learning",
+      "version": 1,
+      "size_bytes": 4211,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_structural.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_structural.instructions.md",
+      "description": "Provenance / Structural",
+      "version": 1,
+      "size_bytes": 11839,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_dependency.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_dependency.instructions.md",
+      "description": "Provenance / Dependency",
+      "version": 1,
+      "size_bytes": 10724,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_boundary.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_boundary.instructions.md",
+      "description": "Provenance / Boundary",
+      "version": 1,
+      "size_bytes": 3800,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_temporal.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_temporal.instructions.md",
+      "description": "Provenance / Temporal",
+      "version": 1,
+      "size_bytes": 871,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_decision.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_decision.instructions.md",
+      "description": "Provenance / Decision",
+      "version": 1,
+      "size_bytes": 826,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_cognitive.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_cognitive.instructions.md",
+      "description": "Provenance / Cognitive",
+      "version": 1,
+      "size_bytes": 4148,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "provenance_stakeholder.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/provenance_stakeholder.instructions.md",
+      "description": "Provenance / Stakeholder",
+      "version": 1,
+      "size_bytes": 7160,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "constraint_security.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/constraint_security.instructions.md",
+      "description": "Constraint / Security",
+      "version": 1,
+      "size_bytes": 992,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "constraint_resilience.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/constraint_resilience.instructions.md",
+      "description": "Constraint / Resilience",
+      "version": 1,
+      "size_bytes": 4113,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "constraint_operational.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/constraint_operational.instructions.md",
+      "description": "Constraint / Operational",
+      "version": 1,
+      "size_bytes": 576,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "constraint_policy.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".github/instructions/constraint_policy.instructions.md",
+      "description": "Constraint / Policy",
+      "version": 1,
+      "size_bytes": 7281,
+      "last_updated": "2026-09-25T09:32:41.625117+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "rules.md": {
+      "path": ".kiro/steering/rules.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 11901,
+      "description": "rules",
+      "last_updated": "2026-09-25T09:32:40.546285+00:00",
+      "source_commit": "initial"
+    },
+    "policies.md": {
+      "path": ".kiro/steering/policies.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 7183,
+      "description": "policies",
+      "last_updated": "2026-09-25T09:29:08.512282+00:00",
+      "source_commit": "initial"
+    },
+    "standards.md": {
+      "path": ".kiro/steering/standards.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 10921,
+      "description": "standards",
+      "last_updated": "2026-09-25T09:32:40.555287+00:00",
+      "source_commit": "initial"
+    },
+    "instruction.md": {
+      "path": ".kiro/steering/instruction.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 27183,
+      "description": "Instructions \u2014 ECommerce",
+      "last_updated": "2026-09-25T09:32:43.143038+00:00",
+      "source_commit": "initial"
+    },
+    "architecture.md": {
+      "path": ".kiro/steering/architecture.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 32955,
+      "description": "architecture",
+      "last_updated": "2026-09-25T09:32:40.495056+00:00",
+      "source_commit": "initial"
+    },
+    "setup/README.md": {
+      "path": ".kiro/steering/README.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 5711,
+      "description": "README",
+      "last_updated": "2026-09-25T09:29:08.512282+00:00",
+      "source_commit": "initial"
+    },
+    "ECommerce_context.md": {
+      "path": ".kiro/steering/ECommerce_context.md",
+      "tags": [
+        "ECommerce"
+      ],
+      "status": "active",
+      "version": 1,
+      "size_bytes": 19845,
+      "description": "context",
+      "last_updated": "2026-09-25T09:29:08.512282+00:00",
+      "source_commit": "initial"
+    }
+  },
+  "statistics": {
+    "total_files": 24,
+    "total_size_bytes": 191244
+  },
+  "mcp": {
+    "config_path": ".github/mcp.json",
+    "servers": [
+      "jira"
+    ]
+  }
+}
