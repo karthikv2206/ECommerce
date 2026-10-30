@@ -1,120 +1,111 @@
 # context
 
 ## System Overview
-The ECommerce repository is a comprehensive Java-based web application built using the Spring MVC framework. This system provides a complete e-commerce platform with both customer-facing and administrative functionality.
+The ECommerce repository is a comprehensive Java-based e-commerce web application built using the Spring MVC framework. This system provides a complete online shopping platform with distinct interfaces for customers and administrators.
 
-### Purpose
+### Core Purpose
 
-- **Customer Operations**: Product browsing, shopping cart management, wishlist functionality, user account management, and order processing
-- **Administrative Management**: Complete backend administration for categories, products, suppliers, and user management
-- **Security & Authentication**: Role-based access control with different permission levels for customers, administrators, and database administrators
+The application serves as a full-featured e-commerce solution that enables:
+- **Customer Experience**: Product browsing, shopping cart management, wishlist functionality, and user account management
+- **Administrative Control**: Complete backend management of products, categories, suppliers, and users
+- **Secure Operations**: Role-based authentication and authorization with support for multiple user types (DBA, Admin, User)
 
-### Core Functionality
+### Key Functional Areas
 
-**Customer Features:**
-- Product catalog browsing and search
-- Shopping cart operations (add, remove, update quantities)
-- Wishlist management for saving desired products
-- User account registration, login, and profile management
-- Order placement and tracking
+**Customer-Facing Features:**
+- Product catalog with category-based browsing and search capabilities
+- Shopping cart system for item management and checkout processes
+- Personal wishlist functionality for saving desired products
+- User account management including registration, login, and profile editing
+- Order processing and tracking system
 
 **Administrative Features:**
-- Category management (CRUD operations)
-- Product management (inventory, pricing, descriptions)
-- Supplier management and relationships
-- User management and status control
-- Comprehensive dashboard for system oversight
+- Comprehensive admin dashboard for system oversight
+- Category management with full CRUD operations
+- Product management including inventory and supplier relationships
+- User management with status control and account administration
+- Supplier management for vendor relationships
 
-**Technical Capabilities:**
-- RESTful API endpoints for all operations
-- Secure authentication with custom success handlers
-- Email service integration for notifications
-- Hibernate ORM for database operations
-- Spring Security for authorization and access control
+**Technical Foundation:**
+- Spring MVC architecture with layered design (Controller-Service-DAO-Model)
+- Hibernate ORM for database operations and entity management
+- Spring Security for authentication and role-based access control
+- RESTful API endpoints for both user and administrative operations
 
-### Architecture Approach
-
-The system follows a layered architecture pattern with clear separation of concerns:
-
-- **Presentation Layer**: Spring MVC controllers handling HTTP requests and responses
-- **Business Logic Layer**: Service classes implementing core business rules
-- **Data Access Layer**: DAO pattern for database operations
-- **Model Layer**: Entity classes representing business objects
-- **Configuration Layer**: Spring configuration for security, database, and web flow setup
-
-This architecture ensures maintainability, scalability, and clear separation between different system responsibilities while providing a robust foundation for e-commerce operations.
+The system follows enterprise-grade architectural patterns including the MVC pattern, DAO pattern, and Service Layer pattern, ensuring maintainable and scalable code organization. The application supports multiple user roles with customized authentication flows and provides a robust foundation for e-commerce operations.
 
 ## Domain Model
-their relationships
+The ECommerce application is built around several core domain entities that represent the business concepts and their relationships:
 
-### Core Domain Entities
+### Core Entities
 
 #### User Management
-- **User**: Central entity managing user authentication, profile information, and associations with cart and wishlist
-- **Roles**: Defines user authorization levels (admin, DBA, regular user)
+- **User**: Central entity representing system users with email, mobile, role, and active status properties. Users can have different roles (DBA, Admin, User) and maintain relationships with cart and wishlist entities
+- **Roles**: Defines user permission levels within the system
 - **ShippingDetails**: Manages delivery address information for orders
 
 #### Product Catalog
-- **Product**: Core product entity with properties for name, price, description, image, category association, and discount information
-- **Category**: Product categorization entity for organizing the product catalog
-- **Supplier**: Manages supplier information for product sourcing
+- **Product**: Core business entity containing price, image, description, discount information, and relationships to categories and suppliers
+- **Category**: Organizes products into logical groupings with name and description properties
+- **Supplier**: Represents product suppliers and maintains supply chain relationships
 
-#### Shopping & Orders
-- **Cart**: Shopping cart entity linking users to products with quantity and total amount tracking
-- **CustomerOrder**: Order management entity handling order details, status, dates, and shipping addresses
-- **Wishlist**: User wishlist functionality for saving desired products
+#### Shopping Experience
+- **Cart**: Shopping cart entity with quantity, total, user association, and status tracking
+- **Wishlist**: User's saved items for future consideration
+- **CustomerOrder**: Order entity managing payment mode, grand total, status, and address information
 
 ### Entity Relationships
 
-The domain model establishes clear relationships between entities:
+The domain model follows these key relationships:
 
-- **User ↔ Cart**: One-to-one relationship where each user has an associated shopping cart
-- **User ↔ Wishlist**: One-to-one relationship for user wishlist management
-- **Cart ↔ Product**: Many-to-one relationship linking cart items to specific products
-- **Product ↔ Category**: Many-to-one relationship for product categorization
-- **User ↔ Roles**: Association for role-based access control
+- **Product-Category**: Products belong to categories (many-to-one)
+- **Product-Supplier**: Products are supplied by suppliers (many-to-one)
+- **User-Cart**: Users own shopping carts (one-to-many)
+- **User-Wishlist**: Users maintain wishlists (one-to-many)
+- **User-Order**: Users place orders (one-to-many)
 
-### Domain Responsibilities
+### Business Rules
 
-#### User Domain
-- Authentication and authorization management
-- Profile and account information maintenance
-- Shopping cart and wishlist ownership
+- Users must be authenticated to access cart and wishlist functionality
+- Products must be associated with both a category and supplier
+- Cart items maintain quantity and total calculations
+- Orders track payment methods and shipping details
+- Role-based access controls determine user permissions (Admin, DBA, User)
 
-#### Product Domain
-- Product catalog management
-- Category organization and hierarchy
-- Supplier relationship management
-- Pricing and discount handling
+### Domain Services
 
-#### Order Domain
-- Shopping cart operations (add, remove, update quantities)
-- Order processing and status management
-- Shipping details and delivery tracking
+The application implements service interfaces for each major domain area:
+- **UserService**: User account management and authentication
+- **ProductService**: Product catalog operations
+- **CategoryService**: Category management
+- **SupplierService**: Supplier relationship management
+- **MailService**: Communication and notification services
 
-### Supporting Infrastructure
-
-The domain model is supported by a layered architecture:
-
-- **Service Layer**: Business logic implementation for each domain area
-- **Data Access Layer**: DAO pattern implementation for entity persistence
-- **Controller Layer**: Web interface for domain operations (both user-facing and administrative)
-- **Configuration Layer**: Security, database, and application configuration management
+These services encapsulate business logic and coordinate between the web layer and data access layer, ensuring proper separation of concerns and maintainable domain operations.
 
 ## API Inventory
-The ECommerce application exposes a comprehensive REST API with endpoints organized by functional areas:
+The ECommerce application exposes a comprehensive REST API organized into functional modules. Below is the complete inventory of available endpoints:
 
 ### Public Endpoints
 
 | Method | Path | Purpose |
 |--------|------|----------|
-| GET | `/` | Main home page |
-| GET | `/aboutUs` | About us information page |
+| GET | `/` | Home page display |
+| GET | `/aboutUs` | About us page |
+| GET | `/contactUs` | Contact information page |
 | GET | `/login` | User login page |
 | GET | `/logout` | User logout handler |
-| GET | `/register` | User registration handler |
 | GET | `/Registration` | User registration page |
-| GET | `/Access_Denied` | Access denied page |
+| GET | `/register` | User registration handler |
+| GET | `/Access_Denied` | Access denied error page |
+
+### Product & Catalog Endpoints
+
+| Method | Path | Purpose |
+|--------|------|----------|
+| GET | `/displayProduct/productsList` | Display all products |
+| GET | `/displayProduct/productList/categorywise/{category_id}` | Display products by category |
+| GET | `/descriptionPage` | Product description page |
 | GET | `/SearchController` | Product search functionality |
 
 ### User Account Management
@@ -122,10 +113,10 @@ The ECommerce application exposes a comprehensive REST API with endpoints organi
 | Method | Path | Purpose |
 |--------|------|----------|
 | GET | `/account` | User account overview |
-| GET | `/user/{username}/account` | User-specific account details |
-| GET | `/user/{username}/account/edit-details/{user_id}` | Account editing form |
+| GET | `/user/{username}/account` | User-specific account page |
+| GET | `/user/{username}/account/edit-details/{user_id}` | Account edit form |
 | POST | `/updatingAccount-{id}` | Update account details |
-| POST | `/user/{username}/account/edit-details/updatingAccount/{user_id}` | Update user-specific account |
+| POST | `/user/{username}/account/edit-details/updatingAccount/{user_id}` | Update user account details |
 
 ### Shopping Cart Operations
 
@@ -133,6 +124,8 @@ The ECommerce application exposes a comprehensive REST API with endpoints organi
 |--------|------|----------|
 | GET | `/addCart` | Add item to cart |
 | GET | `/{username}/cart` | View user's shopping cart |
+| GET | `/{username}/cart/remove-cart/{cart_id}` | Remove item from cart |
+| GET | `/customerOrder` | Customer order processing |
 
 ### Wishlist Management
 
@@ -142,64 +135,58 @@ The ECommerce application exposes a comprehensive REST API with endpoints organi
 | GET | `/user/{username}/wishlist` | View user's wishlist |
 | GET | `/user/{username}/wishlist/remove-wishlist/{wishlist_id}` | Remove item from wishlist |
 
-### Administrative Endpoints
-
-#### Dashboard
+### Admin Dashboard
 
 | Method | Path | Purpose |
 |--------|------|----------|
-| GET | `/admin/dashboard` | Admin dashboard interface |
+| GET | `/admin/dashboard` | Admin dashboard home |
+| GET | `/gotoadminsection` | Navigate to admin section |
+| GET | `/db` | Database administration |
 
-#### Category Management
+### Admin - Category Management
 
 | Method | Path | Purpose |
 |--------|------|----------|
-| GET | `/admin/categorys/category` | View all categories |
-| POST | `/admin/categorys/add` | Create new category |
+| GET | `/admin/categorys/category` | Category management page |
+| POST | `/admin/categorys/add` | Add new category |
 | GET | `/admin/categorys/edit/{category_id}` | Edit category form |
+| POST | `/admin/categorys/edit/{category_id}` | Update category |
 | GET | `/admin/categorys/delete/{category_id}` | Delete category |
 
-#### Product Management
+### Admin - Product Management
 
 | Method | Path | Purpose |
 |--------|------|----------|
-| GET | `/admin/products/product` | View all products |
+| GET | `/admin/products/product` | Product management page |
 | GET | `/admin/products/edit/{product_id}` | Edit product form |
 | GET | `/admin/products/delete/{product_id}` | Delete product |
 
-#### Supplier Management
+### Admin - Supplier Management
 
 | Method | Path | Purpose |
 |--------|------|----------|
-| GET | `/admin/suppliers/supplier` | View all suppliers |
+| GET | `/admin/suppliers/supplier` | Supplier management page |
 | GET | `/admin/suppliers/edit/{supplier_id}` | Edit supplier form |
 | GET | `/admin/suppliers/delete/{supplier_id}` | Delete supplier |
 
-#### User Management
+### Admin - User Management
 
 | Method | Path | Purpose |
 |--------|------|----------|
-| GET | `/admin/users/user` | View all users |
-| GET | `/admin/users/changeStatus/{id}` | Change user account status |
+| GET | `/admin/users/user` | User management page |
+| GET | `/admin/users/changeStatus/{id}` | Change user status |
 | GET | `/admin/users/delete/{id}` | Delete user account |
 
-### API Controllers
+### API Architecture Notes
 
-The application implements several controller classes to handle these endpoints:
-
-- **HelloWorldController**: Handles public pages and basic navigation
-- **UserAccountController**: Manages user account operations and profile management
-- **CartController**: Handles shopping cart functionality
-- **ProductController**: Manages product display and search operations
-- **AdminCategoryController**: Administrative category management
-- **AdminProductController**: Administrative product management
-- **AdminSupplierController**: Administrative supplier management
-- **AdminUserController**: Administrative user management
-
-All endpoints follow RESTful conventions with appropriate HTTP methods and return either view names for page rendering or redirect responses for action handlers.
+- **Authentication**: Role-based access control with DBA, Admin, and User roles
+- **Response Format**: Primarily returns view names for MVC rendering
+- **Path Parameters**: Used extensively for entity identification (IDs, usernames)
+- **HTTP Methods**: Follows RESTful conventions with GET for retrieval and POST for modifications
+- **Security**: Admin endpoints require appropriate role authorization
 
 ## Data Flows
-The ECommerce application follows several key data flow patterns for request processing and business operations:
+The ECommerce application follows a layered architecture with well-defined data flows between components:
 
 ### Request Processing Flow
 
@@ -217,196 +204,255 @@ flowchart TD
 
 ### Authentication Flow
 
-1. **Login Process**
-   - User accesses `/login` endpoint
-   - Credentials processed by SecurityConfiguration
-   - CustomSuccessHandler manages successful authentication
-   - User redirected to appropriate dashboard based on role
+1. **User Login Request**
+   - `GET /login` → Login page display
+   - User credentials submitted
+   - SecurityConfiguration processes authentication
+   - CustomSuccessHandler manages post-login routing
 
-2. **Registration Flow**
-   - New users access `/register` endpoint
-   - User data validated and processed
-   - Account created through UserService and UserDao
-   - User redirected to login page
-
-### Shopping Cart Operations
-
-1. **Add to Cart Flow**
-   - User triggers `/addCart` endpoint
-   - CartController processes the request
-   - Cart entity associates User and Product
-   - Cart data persisted via CartDao
-
-2. **View Cart Flow**
-   - User accesses `/{username}/cart`
-   - CartController retrieves user's cart items
-   - Cart data displayed with associated products
+2. **User Registration Flow**
+   - `GET /register` → Registration page
+   - `GET /Registration` → Registration form
+   - User data validation and account creation
 
 ### Admin Management Flows
 
-1. **Product Management**
-   - Admin accesses `/admin/products/product`
-   - ProductController delegates to ProductService
-   - ProductService uses ProductDao for data operations
-   - Product entities linked to Category entities
+**Category Management:**
+- `GET /admin/dashboard` → Admin dashboard
+- `GET /admin/categorys/category` → Category listing
+- `POST /admin/categorys/add` → Create new category
+- `GET /admin/categorys/edit/{category_id}` → Edit category form
+- `POST /admin/categorys/edit/{category_id}` → Update category
+- `GET /admin/categorys/delete/{category_id}` → Delete category
 
-2. **User Management**
-   - Admin accesses `/admin/users/user`
-   - User status changes via `/admin/users/changeStatus/{id}`
-   - UserService handles business logic
-   - UserDao manages persistence
+**Product Management:**
+- `GET /admin/products/product` → Product listing
+- `POST /admin/products/add` → Create new product
+- `GET /admin/products/edit/{product_id}` → Edit product form
+- `POST /admin/products/edit/{product_id}` → Update product
+- `GET /admin/products/delete/{product_id}` → Delete product
 
-### Account Management Flow
+**User Management:**
+- `GET /admin/users/user` → User listing
+- `GET /admin/users/changeStatus/{id}` → Toggle user status
+- `GET /admin/users/delete/{id}` → Delete user
 
-1. **Account Updates**
-   - User accesses `/user/{username}/account/edit-details/{user_id}`
-   - POST to `/updatingAccount-{id}` or `/user/{username}/account/edit-details/updatingAccount/{user_id}`
-   - Both routes delegate to `updateAccountDetails` handler
-   - Account changes persisted through UserService
+### Customer Shopping Flows
 
-### Wishlist Operations
+**Cart Operations:**
+- `GET /addCart` → Add item to cart
+- `GET /{username}/cart` → View user's cart
+- `GET /{username}/cart/remove-cart/{cart_id}` → Remove from cart
 
-1. **Wishlist Management**
-   - Users access `/user/{username}/wishlist`
-   - Items added via `/user/addWishlistItem`
-   - Wishlist entities associated with User accounts
-   - Data managed through appropriate service and DAO layers
+**Wishlist Operations:**
+- `GET /user/addWishlistItem` → Add to wishlist
+- `GET /user/{username}/wishlist` → View user's wishlist
+- `GET /user/{username}/wishlist/remove-wishlist/{wishlist_id}` → Remove from wishlist
 
-All data flows follow the consistent pattern of Controller → Service → DAO → Database, ensuring separation of concerns and maintainable architecture.
+**Account Management:**
+- `GET /user/{username}/account` → View account details
+- `GET /user/{username}/account/edit-details/{user_id}` → Edit account form
+- `POST /user/{username}/account/edit-details/updatingAccount/{user_id}` → Update account
+- `POST /updatingAccount-{id}` → Alternative account update endpoint
+
+### Product Discovery Flow
+
+- `GET /` → Home page with featured products
+- `GET /displayProduct/productsList` → All products listing
+- `GET /displayProduct/productList/categorywise/{category_id}` → Category-filtered products
+- `GET /SearchController` → Product search functionality
+- `GET /descriptionPage` → Product detail view
+
+### Data Layer Interactions
+
+Each business operation follows the pattern:
+1. **Controller** receives HTTP request
+2. **Service Layer** implements business logic
+3. **DAO Layer** handles data persistence
+4. **Model Classes** represent domain entities
+
+Key entity relationships:
+- Products belong to Categories and are supplied by Suppliers
+- Carts and Wishlists belong to Users
+- All operations maintain referential integrity through proper DAO implementations
 
 ## External Integrations
 The ECommerce application integrates with several external systems and services to provide comprehensive functionality:
 
 ### Database Integration
 
-The application uses a layered data access architecture with dedicated DAO (Data Access Object) implementations:
+The application uses a layered data access architecture with DAO (Data Access Object) pattern implementations:
 
-- **CartDaoImpl** - Handles shopping cart persistence operations
-- **CategoryDaoImpl** - Manages product category data access
-- **ProductDaoImpl** - Handles product information storage and retrieval
-- **SupplierDaoImpl** - Manages supplier data operations
-- **UserDaoImpl** - Handles user account and authentication data
-
-Each DAO implementation follows the interface pattern, providing abstraction between the business logic and data persistence layers.
+- **Category Data Access**: `CategoryDaoImpl` implements `CategoryDao` for category management operations
+- **Product Data Access**: `ProductDaoImpl` implements `ProductDao` for product catalog operations  
+- **User Data Access**: `UserDaoImpl` implements `UserDao` for user account management
+- **Cart Data Access**: `CartDaoImpl` implements `CartDao` for shopping cart persistence
+- **Supplier Data Access**: `SupplierDaoImpl` implements `SupplierDao` for supplier information management
 
 ### Email Services
 
-The system includes email functionality through the **MailService** interface and its implementation **MailServiceImpl**. This service handles:
+The system includes email functionality through:
 
-- User registration confirmations
-- Password reset notifications
-- Order confirmations and updates
-- Administrative notifications
+- **Mail Service**: `MailServiceImpl` implements `MailService` interface for email notifications and communications
+- **Contact Integration**: Contact us functionality (`/contactUs`) for customer inquiries
 
-### Authentication Integration
+### Authentication & Security
 
-The application integrates with Spring Security for authentication and authorization:
+- **Custom Authentication**: `SecurityConfiguration` uses `CustomSuccessHandler` for specialized authentication flows
+- **Session Management**: User session handling for cart and wishlist persistence
+- **Access Control**: Role-based access with admin dashboard restrictions
 
-- **SecurityConfiguration** - Configures security policies and access controls
-- **CustomSuccessHandler** - Handles post-authentication routing and session management
-- Role-based access control for admin and user functions
+### Third-Party Service Endpoints
 
-### Third-Party Service Architecture
+The application exposes integration points for:
 
-- **CategoryService/CategoryServiceImpl** - Product categorization services
-- **ProductService/ProductServiceImpl** - Product management and search capabilities
-- **SupplierService/SupplierServiceImpl** - Supplier relationship management
-- **UserService/UserServiceImpl** - User account and profile management
+- **Database Administration**: `/db` endpoint for database management tools
+- **External Search**: Search functionality through `SearchController` for product discovery
+- **Order Processing**: Customer order integration via `/customerOrder` endpoint
 
-and shipping providers through the established service interface pattern.
+### Service Layer Architecture
+
+Business logic is abstracted through service interfaces:
+
+- **Category Services**: `CategoryServiceImpl` implements `CategoryService`
+- **Product Services**: `ProductServiceImpl` implements `ProductService`  
+- **User Services**: `UserServiceImpl` implements `UserService`
+- **Supplier Services**: `SupplierServiceImpl` implements `SupplierService`
+
+core business logic
 
 ## User Journeys
 ### Customer Journey
 
-#### New Customer Registration and Shopping
-1. **Landing** - Customer visits home page (`GET /`)
-2. **Registration** - Customer creates account (`GET /Registration`, `GET /register`)
-3. **Product Discovery** - Customer browses products and searches (`GET /SearchController`)
-4. **Shopping Cart** - Customer adds items to cart (`GET /addCart`, `GET /{username}/cart`)
-5. **Wishlist Management** - Customer saves items for later (`GET /user/addWishlistItem`, `GET /user/{username}/wishlist`)
-6. **Account Management** - Customer manages profile (`GET /user/{username}/account`, `POST /user/{username}/account/edit-details/updatingAccount/{user_id}`)
+#### Product Discovery & Shopping
+1. **Browse Products**: Customers visit the home page (`/`) and can view all products (`/displayProduct/productsList`) or filter by category (`/displayProduct/productList/categorywise/{category_id}`)
+2. **Product Details**: View detailed product information on the description page (`/descriptionPage`)
+3. **Add to Cart**: Add desired items to shopping cart (`/addCart`) and manage cart contents (`/{username}/cart`)
+4. **Wishlist Management**: Save items for later (`/user/addWishlistItem`) and manage wishlist (`/user/{username}/wishlist`)
+5. **Account Management**: Register (`/register`), login (`/login`), and manage account details (`/user/{username}/account`)
+6. **Order Placement**: Complete purchases through the customer order flow (`/customerOrder`)
 
-#### Returning Customer Journey
-1. **Authentication** - Customer logs in (`GET /login`)
-2. **Account Access** - Customer views account details (`GET /account`, `GET /user/{username}/account`)
-3. **Cart Management** - Customer manages existing cart items (`GET /{username}/cart`)
-4. **Wishlist Review** - Customer reviews saved items (`GET /user/{username}/wishlist`, `GET /user/{username}/wishlist/remove-wishlist/{wishlist_id}`)
+#### Authentication Flow
+- **Registration**: New users register via `/Registration` endpoint
+- **Login**: Users authenticate through `/login` with role-based redirection handled by `CustomSuccessHandler`
+- **Role-based Access**: System redirects users to appropriate sections (DBA, Admin, User) based on their role
 
 ### Administrator Journey
 
-#### Daily Administrative Tasks
-1. **Dashboard Access** - Admin logs in and accesses dashboard (`GET /admin/dashboard`)
-2. **Category Management** - Admin manages product categories:
-   - View categories (`GET /admin/categorys/category`)
-   - Add new category (`POST /admin/categorys/add`)
-   - Edit category (`GET /admin/categorys/edit/{category_id}`)
-   - Delete category (`GET /admin/categorys/delete/{category_id}`)
-3. **Product Management** - Admin manages product catalog:
-   - View products (`GET /admin/products/product`)
-   - Edit product (`GET /admin/products/edit/{product_id}`)
-   - Delete product (`GET /admin/products/delete/{product_id}`)
-4. **User Management** - Admin manages user accounts:
-   - View users (`GET /admin/users/user`)
-   - Change user status (`GET /admin/users/changeStatus/{id}`)
-   - Delete user (`GET /admin/users/delete/{id}`)
-5. **Supplier Management** - Admin manages suppliers:
-   - View suppliers (`GET /admin/suppliers/supplier`)
-   - Edit supplier (`GET /admin/suppliers/edit/{supplier_id}`)
-   - Delete supplier (`GET /admin/suppliers/delete/{supplier_id}`)
+#### Admin Dashboard Access
+1. **Login**: Administrators authenticate and are redirected to admin dashboard (`/admin/dashboard`)
+2. **Navigation**: Access admin section via `/gotoadminsection`
+
+#### Content Management
+1. **Category Management**:
+   - View categories (`/admin/categorys/category`)
+   - Add new categories (`POST /admin/categorys/add`)
+   - Edit existing categories (`/admin/categorys/edit/{category_id}`)
+   - Delete categories (`/admin/categorys/delete/{category_id}`)
+
+2. **Product Management**:
+   - View products (`/admin/products/product`)
+   - Edit product details (`/admin/products/edit/{product_id}`)
+   - Delete products (`/admin/products/delete/{product_id}`)
+
+3. **Supplier Management**:
+   - View suppliers (`/admin/suppliers/supplier`)
+   - Edit supplier information (`/admin/suppliers/edit/{supplier_id}`)
+   - Delete suppliers (`/admin/suppliers/delete/{supplier_id}`)
+
+4. **User Management**:
+   - View all users (`/admin/users/user`)
+   - Change user status (`/admin/users/changeStatus/{id}`)
+   - Delete users (`/admin/users/delete/{id}`)
 
 ### Developer Journey
 
-#### Setting Up Development Environment
-1. **Configuration Setup** - Developer configures Spring components:
-   - Database configuration via `HibernateConfiguration`
-   - Security setup via `SecurityConfiguration`
-   - Web flow configuration via `HelloWorldConfiguration`
-2. **Controller Development** - Developer implements business logic:
-   - User-facing controllers (`CartController`, `ProductController`, `UserAccountController`)
-   - Admin controllers (`AdminCategoryController`, `AdminProductController`, `AdminUserController`)
-3. **Service Layer Implementation** - Developer creates business services:
-   - Product services (`ProductService`, `ProductServiceImpl`)
-   - User services (`UserService`, `UserServiceImpl`)
-   - Category services (`CategoryService`, `CategoryServiceImpl`)
-4. **Data Access Layer** - Developer implements data persistence:
-   - DAO interfaces (`ProductDao`, `UserDao`, `CategoryDao`)
-   - DAO implementations (`ProductDaoImpl`, `UserDaoImpl`, `CategoryDaoImpl`)
+#### Application Setup
+1. **Configuration**: Set up Spring MVC configuration via `HelloWorldConfiguration`
+2. **Security Setup**: Configure authentication and authorization through `SecurityConfiguration`
+3. **Database Setup**: Configure Hibernate ORM and data source via `HibernateConfiguration`
+4. **Web Flow**: Set up application flow using `WebFlowConfig`
 
-#### Authentication Flow
-The `CustomSuccessHandler` manages role-based redirection after successful authentication, directing users to appropriate interfaces based on their roles (admin, DBA, or regular user).
+#### Development Workflow
+1. **Controller Development**: Implement MVC controllers for different functional areas:
+   - `CartController` for shopping cart operations
+   - `ProductController` for product display and search
+   - `UserAccountController` for account management
+   - `WishlistController` for wishlist functionality
+   - Admin controllers for backend management
+
+2. **Service Layer**: Implement business logic through service interfaces and implementations:
+   - `CategoryService`/`CategoryServiceImpl`
+   - `ProductService`/`ProductServiceImpl`
+   - `UserService`/`UserServiceImpl`
+   - `SupplierService`/`SupplierServiceImpl`
+
+3. **Data Access**: Implement data persistence through DAO pattern:
+   - `CategoryDao`/`CategoryDaoImpl`
+   - `ProductDao`/`ProductDaoImpl`
+   - `UserDao`/`UserDaoImpl`
+   - `CartDao`/`CartDaoImpl`
+
+4. **Model Development**: Define domain entities:
+   - `User` with email, mobile, role, and relationships
+   - `Product` with price, description, category, and supplier relationships
+   - `Cart` with quantity, total, and user associations
+   - `Category` with name, description, and product relationships
+   - `CustomerOrder` with payment and shipping details
+
+### Common User Flows
+
+#### Shopping Cart Flow
+1. Browse products → Add to cart (`/addCart`) → View cart (`/{username}/cart`) → Remove items if needed (`/{username}/cart/remove-cart/{cart_id}`) → Proceed to checkout
+
+#### Wishlist Flow
+1. Browse products → Add to wishlist (`/user/addWishlistItem`) → View wishlist (`/user/{username}/wishlist`) → Remove items (`/user/{username}/wishlist/remove-wishlist/{wishlist_id}`) → Move to cart
+
+#### Account Management Flow
+1. Register (`/register`) → Login (`/login`) → Access account (`/user/{username}/account`) → Edit details → Update account (`POST /user/{username}/account/edit-details/updatingAccount/{user_id}`)
 
 ## Deployment Notes
-### Runtime Architecture
+Based on the Spring MVC architecture, this application follows a typical Java web application deployment pattern:
 
-The ECommerce application follows a traditional Spring MVC deployment model with the following runtime characteristics:
+### Runtime Environment
+- **Application Server**: Requires Java servlet container (Tomcat, Jetty, or similar)
+- **Framework Stack**: Spring Framework with Hibernate ORM integration
+- **Security Layer**: Spring Security for authentication and authorization
+- **Web Flow**: Spring Web Flow for complex page navigation
 
-**Application Tier**
-- Spring MVC web application deployed as a WAR file
-- Embedded or external servlet container (Tomcat/Jetty)
-- Service layer components managed by Spring IoC container
-- Dependency injection configured through Spring configuration
+### Deployment Topology
 
-**Data Tier**
-- DAO layer provides abstraction over data persistence
-- Database connectivity through JDBC or ORM framework
-- Connection pooling for database resource management
-
-**Request Flow Topology**
-
+```mermaid
+graph TB
+    Client[Web Browser] --> WebServer[Web Server/Load Balancer]
+    WebServer --> AppServer[Application Server]
+    AppServer --> SpringApp[Spring MVC Application]
+    SpringApp --> Database[(Database)]
+    
+    subgraph "Application Layers"
+        Controller[Web Controllers]
+        Service[Service Layer]
+        DAO[DAO Layer]
+        Model[Domain Models]
+    end
+    
+    SpringApp --> Controller
+    Controller --> Service
+    Service --> DAO
+    DAO --> Model
 ```
-HTTP Request → Web Controller → Service Layer → DAO Layer → Database
-                     ↓
-              View Resolution → HTTP Response
-```
 
-**Deployment Considerations**
-- Controllers handle both admin and user-facing endpoints
-- Layered architecture supports horizontal scaling at service tier
-- DAO pattern enables database abstraction and testing
-- MVC separation allows independent scaling of presentation and business logic
+### Component Distribution
+- **Web Layer**: Controllers handle HTTP requests and responses
+- **Business Layer**: Services contain business logic and transaction management
+- **Data Layer**: DAOs manage database interactions through Hibernate
+- **Domain Layer**: Model classes represent business entities
 
-**Configuration Requirements**
-- Spring application context configuration
-- Database connection configuration
-- Web.xml servlet mapping configuration
-- Service and DAO bean definitions
+### Runtime Dependencies
+- Spring Framework core modules
+- Hibernate ORM for database persistence
+- Spring Security for authentication/authorization
+- Spring Web Flow for stateful web interactions
+- Database connectivity (JDBC drivers)
+
+*Note: Specific deployment configuration details are not available in the current codebase documentation.*
