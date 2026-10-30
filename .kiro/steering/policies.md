@@ -1,131 +1,173 @@
 # policies
 
 ## Security Architecture
-### Access Control
+### Authentication and Authorization
 
-#### Unauthorized Access Handling
-The system implements a structured approach to handling unauthorized access attempts:
+**Controller-Level Security**
+- All controllers must implement proper service layer dependencies for user authentication
+- User-facing and admin-facing controllers are separated to enforce role-based access control
+- Controllers delegate authentication logic to the service layer rather than handling it directly
 
-- **Access Denied Page**: Dedicated endpoint (`/Access_Denied`) provides user-friendly error handling for unauthorized access attempts
-- **Graceful Degradation**: Users are redirected to appropriate error pages rather than receiving raw HTTP error codes
-- **Security Transparency**: Clear communication of access restrictions without exposing sensitive system information
+**Data Access Security**
+- All domain entities (User, Product, Cart) implement Serializable interface to ensure secure data transmission
+- DAO layer provides controlled data access patterns, preventing direct database manipulation
+- Service layer acts as security boundary between controllers and data access
 
-### Authentication Flow
-The application follows standard web authentication patterns:
+**HTTP Method Security**
+- **SECURITY CONCERN**: Current implementation uses GET methods for delete operations, which violates REST security principles
+- DELETE operations should use proper HTTP DELETE methods to prevent accidental data loss via URL access
+- GET requests are cached
 
-1. **Request Interception**: Incoming requests are evaluated for authentication requirements
-2. **Access Validation**: System checks user permissions against requested resources
-3. **Denial Handling**: Unauthorized requests are redirected to the access denied page
-4. **Session Management**: Authentication state is maintained throughout user sessions
+### Security Controls
+
+**Layered Security Architecture**
+1. **Presentation Layer**: Controllers validate user input and enforce view-level security
+2. **Business Logic Layer**: Services implement business rules and authorization logic
+3. **Data Access Layer**: DAOs provide controlled database access with proper query validation
+
+**Required Security Implementations**
+- Service layer must validate user permissions before executing business operations
+- All user inputs must be validated at controller level before passing to services
+- Session management and user authentication must be handled through dedicated service components
 
 ## Security Policies
-### Access Control Policy
-
-**Policy**: All unauthorized access attempts must be handled gracefully with appropriate user feedback.
-
-**Implementation**: 
-- System provides dedicated access denied page for unauthorized access attempts
-- Users are redirected to `/Access_Denied` endpoint when access is denied
-- Access denied responses maintain user experience while protecting system security
-
-**Severity**: Medium
-
 ### Authentication Policy
 
-### Data Protection Policy
+**Requirement**: All user-facing endpoints must implement authentication
 
-at rest.
+**Implementation**:
+- User authentication required for cart operations
+- Admin authentication required for category and product management
+- Session timeout after 30 minutes of inactivity
+
+### Authorization Policy
+
+**Requirement**: Role-based access control for administrative functions
+
+**Implementation**:
+- Regular users: Access to product browsing and cart operations
+- Admin users: Access to category and product management endpoints
+- Service layer must validate user roles before data operations
+
+### Data Validation Policy
+
+**Standards**:
+- Input sanitization for all user-provided data
+- Parameter validation in controller methods
+- Business rule validation in service layer
+
+### Secure Communication Policy
+
+### Incident Response Policy
 
 ## Business Rules
 ### Access Control Rules
 
 #### Administrative Access
-- **Admin Path Segregation**: All administrative functions must be accessed through the `/admin` path prefix
-- **Role-based Permissions**: System enforces strict role-based access control with three distinct roles:
-  - **Admin**: Full administrative access to dashboard and management functions
+- **Rule**: All administrative functions must be segregated under the `/admin` path prefix
+- **Severity**: High
+- **Rationale**: Ensures clear separation between administrative and user-facing functionality
+- **Implementation**: Administrative endpoints like `/admin/dashboard` are protected and isolated
+
+#### Role-Based Access Control (RBAC)
+- **Rule**: System must enforce role-based access with three distinct privilege levels
+- **Severity**: High
+- **Roles Supported**:
   - **DBA**: Database administration privileges
-  - **User**: Standard user access with personal resource management
+  - **Admin**: Administrative system access
+  - **User**: Standard user operations
+- **Implementation**: Custom authentication handler manages role-based routing and permissions
 
-#### User Resource Management
-- **Username-based Routing**: User-specific resources (cart, wishlist, account) require username in the URL path
-- **Personal Resource Isolation**: Each user can only access their own cart and wishlist through authenticated sessions
-- **Account Access Pattern**: User accounts follow the pattern `/user/{username}/account` for secure access
+#### User Resource Isolation
+- **Rule**: User-specific resources must be accessed via username-parameterized paths
+- **Severity**: Medium
+- **Scope**: Applies to personal resources including:
+  - User accounts: `/user/{username}/account`
+  - Shopping carts: `/{username}/cart`
+  - Personal data and preferences
+- **Purpose**: Ensures users can only access their own resources
 
-### Shopping Cart Business Rules
-- **Cart Ownership**: Shopping carts are user-specific and accessed via `/{username}/cart` pattern
-- **Quantity Tracking**: System maintains product quantities and calculates total amounts automatically
-- **Session Management**: Cart state is preserved across user sessions
+### E-Commerce Business Rules
 
-### Security Policies
-- **Access Denied Handling**: Unauthorized access attempts are redirected to a dedicated `/Access_Denied` page
-- **Authentication Required**: All user-specific resources require valid authentication
-- **Role-based Redirects**: Post-authentication redirects are determined by user role assignments
+#### Shopping Cart Management
+- **Rule**: Shopping cart operations must maintain data integrity for quantity and totals
+- **Severity**: Medium
+- **Requirements**:
+  - Users can add items to cart with specified quantities
+  - Users can remove items from cart
+  - System must track and calculate cart totals accurately
+  - Cart state must persist across user sessions
+
+#### Product Organization
+- **Rule**: All products must be properly categorized with supplier relationships
+- **Severity**: Medium
+- **Requirements**:
+  - Every product must belong to at least one category
+  - Products must have associated supplier information
+  - Category hierarchy must be maintained for navigation
+  - Supplier relationships must be tracked for inventory management
 
 ### Validation Rules
-- **Path Parameter Validation**: Username parameters in URLs must match authenticated user identity
-- **Permission Verification**: Each request validates user permissions against required access levels
-- **Resource Ownership**: Users can only modify resources they own (cart items, wishlist entries)
+
+#### Data Integrity
+- All user inputs must be validated before processing
+- Monetary calculations must maintain precision for financial accuracy
+- User authentication must be verified for all protected operations
+
+#### Business Logic Constraints
+- Cart operations require valid user authentication
+- Administrative functions require appropriate role permissions
+- Product modifications require supplier validation
 
 ## Policies & Governance
 ### Access Control Policies
 
-#### Administrative Access Control
-Administrative functions are strictly segregated under the `/admin` path prefix, requiring appropriate administrative permissions for access. This ensures that sensitive administrative operations are protected from unauthorized access.
-
-**Evidence**: Administrative dashboard and functions are isolated under dedicated admin routes
+#### Administrative Access
+- **Policy**: All administrative functions must be segregated under the `/admin` path prefix
+- **Enforcement**: Administrative dashboard and management functions are restricted to authorized personnel only
+- **Compliance Level**: High Priority
 
 #### Role-Based Access Control (RBAC)
-The system implements a comprehensive role-based access control system supporting multiple user roles:
+- **Supported Roles**:
+  - **DBA**: Database administration privileges
+  - **Admin**: System administration and user management
+  - **User**: Standard customer access to shopping features
+- **Policy Enforcement**: Custom success handler manages role-based redirections and access controls
+- **Compliance Level**: High Priority
 
-- **Admin**: Full administrative access with redirect to admin dashboard
-- **DBA**: Database administration privileges with specialized access patterns
-- **User**: Standard user access with personal resource management capabilities
+#### User Resource Access
+- **Policy**: User-specific resources (cart, wishlist, account) must be accessed via username-parameterized paths
+- **Implementation**: Resources follow the pattern `/user/{username}/resource` or `/{username}/resource`
+- **Privacy Control**: Ensures users can only access their own data
+- **Compliance Level**: Medium Priority
 
-Each role has distinct access levels and redirect strategies managed through the custom success handler implementation.
+### Data Governance
 
-#### User Resource Isolation
-User-specific resources such as shopping carts and wishlists are accessed through username-based routing patterns, ensuring proper data isolation and preventing unauthorized access to personal user data.
+#### Product Data Management
+- **Policy**: All products must be properly categorized and linked to verified suppliers
+- **Requirements**:
+  - Products must belong to defined categories
+  - Supplier relationships must be established and maintained
+  - Product data integrity must be preserved
+- **Compliance Level**: Medium Priority
 
-**Protected Resources**:
-- User account information: `/user/{username}/account`
-- Shopping cart: `/{username}/cart`
-- Wishlist: `/user/{username}/wishlist`
+#### Shopping Cart Governance
+- **Policy**: Cart operations must maintain data consistency and user ownership
+- **Controls**:
+  - Quantity tracking and validation
+  - Total calculation accuracy
+  - User-specific cart isolation
+- **Compliance Level**: Medium Priority
 
-### Security Policies
+### Compliance Framework
 
-#### Access Denial Handling
-The system provides a dedicated access denied page (`/Access_Denied`) to handle unauthorized access attempts gracefully, ensuring users receive appropriate feedback when attempting to access restricted resources.
+#### Security Controls
+1. **Authentication**: Required for all user-specific operations
+2. **Authorization**: Role-based access enforcement at application level
+3. **Data Segregation**: Administrative and user functions are clearly separated
+4. **Audit Trail**: Access patterns tracked through role-based success handling
 
-#### Data Privacy Controls
-Shopping cart management includes quantity and total amount tracking with user-specific data isolation, ensuring that personal shopping data remains private and secure.
-
-### Compliance Controls
-
-#### Audit Trail
-All administrative and user-specific resource access is logged and tracked through the routing system, providing necessary audit capabilities for compliance requirements.
-
-#### Segregation of Duties
-Clear separation between administrative functions (`/admin/*`) and user functions (`/user/*`, `/{username}/*`) ensures proper segregation of duties and reduces the risk of privilege escalation.
-
-## Compliance Requirements
-### Access Control Compliance
-
-#### Unauthorized Access Handling
-- **Policy**: System must provide dedicated access denied pages for unauthorized access attempts
-- **Implementation**: Dedicated endpoint at `/Access_Denied` for handling unauthorized access scenarios
-- **Severity Level**: Medium priority compliance requirement
-- **Purpose**: Ensures proper user feedback and audit trail for access violations
-
-### Audit Requirements
-
-#### Access Violation Tracking
-- All unauthorized access attempts must be logged and trackable
-- Dedicated access denied pages facilitate proper audit trail maintenance
-- System must maintain records of access denial events for compliance reporting
-
-### Regulatory Considerations
-
-#### Data Protection Compliance
-- Proper access control mechanisms support GDPR and similar data protection regulations
-- Clear access denial processes help demonstrate due diligence in data protection
-- Audit trails from access control systems support compliance reporting requirements
+#### Operational Controls
+1. **Resource Isolation**: User data accessed only through authenticated, parameterized endpoints
+2. **Data Integrity**: Product categorization and supplier relationship validation
+3. **Business Logic**: Cart management follows established business rules for quantity and pricing
