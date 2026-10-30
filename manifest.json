@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-30T10:08:52.245648+00:00",
+  "project": {
+    "name": "Ecommerce AIDLC",
+    "description": "AI context knowledge base",
+    "last_updated": "2026-10-30T10:08:52.245648+00:00"
+  },
+  "assets": {
+    "architecture.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/architecture.md",
+      "description": "architecture",
+      "version": 1,
+      "size_bytes": 32955,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "ECommerce_context.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/ECommerce_context.md",
+      "description": "context",
+      "version": 1,
+      "size_bytes": 19845,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "instruction.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/instruction.md",
+      "description": "Instructions \u2014 ECommerce",
+      "version": 1,
+      "size_bytes": 27183,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "policies.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/policies.md",
+      "description": "policies",
+      "version": 1,
+      "size_bytes": 7183,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "rules.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/rules.md",
+      "description": "rules",
+      "version": 1,
+      "size_bytes": 11901,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "setup/README.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/README.md",
+      "description": "README",
+      "version": 1,
+      "size_bytes": 5711,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    },
+    "standards.md": {
+      "tags": [
+        "ECommerce"
+      ],
+      "path": ".claude/rules/standards.md",
+      "description": "standards",
+      "version": 1,
+      "size_bytes": 10921,
+      "last_updated": "2026-10-30T09:42:08.605377+00:00",
+      "status": "active",
+      "source_commit": "initial"
+    }
+  },
+  "statistics": {
+    "total_files": 7,
+    "total_size_bytes": 115699
+  }
+}
